@@ -41,6 +41,7 @@ endif
 ifeq ($(SUBTARGET),fpga)
 COCO_SDFPGA = 1
 COCO_BECKER = 1
+COCO_COCO3FPGAWIFI = 1
 endif
 
 ifeq ($(SUBTARGET),nano)
@@ -62,10 +63,17 @@ DRIVERS += devsd.o devsd_discard.o sd.o
 CROSS_CC += -DCONFIG_COCOSDFPGA
 endif
 
-ifdef COCO_BECKER
-ASOPTS = --defsym BECKER=1
+ifdef COCO_COCO3FPGAWIFI
+ASOPTS += --defsym COCO3FPGAWIFI=1
+CROSS_CC += -DCONFIG_COCO3FPGAWIFI
 else
-ASOPTS = --defsym BECKER=0 
+ASOPTS += --defsym COCO3FPGAWIFI=0 
+endif
+
+ifdef COCO_BECKER
+ASOPTS += --defsym BECKER=1
+else
+ASOPTS += --defsym BECKER=0 
 endif
 
 all:	$(OBJS)

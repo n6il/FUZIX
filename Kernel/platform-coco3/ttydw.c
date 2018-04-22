@@ -312,6 +312,13 @@ int dw_init( ){
 		kprintf("disabled\n");
 		return -1;
 	}
+#ifdef CONFIG_COCO3FPGAWIFI
+		/* Initialize the coco3fpgawifi */
+		*((volatile unsigned char *)0xFF6C) = 0;
+		while (*((volatile unsigned char *)0xFF6C)&2) {
+			*((volatile unsigned char *)0xFF6D);
+		}
+#endif
 	if ( dw_transaction( buf,2,buf,1,0 ) ){
 		buf[0] = DW_TIME;
 		if (dw_transaction( buf,1,buf,6,0 ) ){

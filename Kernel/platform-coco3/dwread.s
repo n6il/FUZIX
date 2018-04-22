@@ -72,10 +72,18 @@ loop@     ldb    $FF4C
           ELSE
           IFNE BECKER
           IFNDEF BCKSTAT
+          IFNE COCO3FPGAWIFI
+BCKSTAT   equ   $FF6C
+          ELSE
 BCKSTAT   equ   $FF41
           ENDC
+          ENDC
           IFNDEF BCKPORT
+          IFNE COCO3FPGAWIFI
+BCKPORT   equ   $FF6D
+          ELSE
 BCKPORT   equ   $FF42
+          ENDC
           ENDC
 * NOTE: There is no timeout currently on here...
 DWRead    pshs   dp,x,u                 ; preserve registers, push timeout msb

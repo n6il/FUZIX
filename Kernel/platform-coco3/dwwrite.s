@@ -50,7 +50,11 @@ txByte
           ELSE
           IFNE BECKER
           IFNDEF BCKPORT
+          IFNE COCO3FPGAWIFI
+BCKPORT   equ   $FF6D
+          ELSE
 BCKPORT   equ   $FF42
+          ENDC
           ENDC
 DWWrite   pshs      d,cc              ; preserve registers
           IFEQ      NOINTMASK
